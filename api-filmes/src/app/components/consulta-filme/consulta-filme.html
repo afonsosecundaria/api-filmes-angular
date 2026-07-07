@@ -1,0 +1,8 @@
+<div>
+    @if(filme()) {
+        <h1>{{filme()?.Title}}</h1>
+        <p>
+            <img [src]="filme()?.Poster" alt="Poster do filme">
+        </p>
+    }
+</div>
