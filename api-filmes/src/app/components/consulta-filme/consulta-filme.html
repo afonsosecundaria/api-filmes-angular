@@ -1,8 +1,33 @@
-<div>
-    @if(filme()) {
-        <h1>{{filme()?.Title}}</h1>
-        <p>
-            <img [src]="filme()?.Poster" alt="Poster do filme">
-        </p>
+<div class="container">
+
+    <h1>🎬 Catálogo de Filmes</h1>
+
+    <div class="pesquisa">
+        <input
+            type="text"
+            [(ngModel)]="pesquisa"
+            placeholder="Pesquisar filme..."
+            (keyup.enter)="buscar()">
+
+        <button (click)="buscar()">
+            Pesquisar
+        </button>
+    </div>
+
+    @if (filme()) {
+
+        <div class="card">
+
+            <img [src]="filme()?.Poster">
+
+            <h2>{{ filme()?.Title }}</h2>
+
+            <p>{{ filme()?.Year }}</p>
+
+            <p>{{ filme()?.Plot }}</p>
+
+        </div>
+
     }
+
 </div>

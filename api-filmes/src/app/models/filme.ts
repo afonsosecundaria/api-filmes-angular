@@ -1,4 +1,6 @@
 export type Filme = {
     Title: string,
-    Poster: string
+    Poster: string,
+    Year: string,
+    Plot: string
 }

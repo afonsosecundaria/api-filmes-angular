@@ -2,10 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { Filme } from '../../models/filme';
 import { FilmeService } from '../../services/filme.service';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
 
 @Component({
   selector: 'app-consulta-filme',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule],
   templateUrl: './consulta-filme.html',
   standalone: true,
   styleUrl: './consulta-filme.css',
@@ -13,16 +15,19 @@ import { CommonModule } from '@angular/common';
 export class ConsultaFilme {
   filmeService = inject(FilmeService)
 
+  pesquisa = ''
+
   filme = signal<Filme | undefined>(undefined);
 
-  constructor() {
-    this.filmeService.obterFilme('Guardians of the Galaxy: Vol. 2').subscribe({
-      next: (res) => {
-        this.filme.set(res)
-      },
-      error: (err) => {
-        console.error(err)
-      }
-    })
-  }
+  buscar() {
+
+  if (!this.pesquisa.trim()) return;
+
+  this.filmeService.obterFilme(this.pesquisa).subscribe({
+    next: (res) => {
+      this.filme.set(res)
+    }
+  });
+
+}
 }
